@@ -1,0 +1,25 @@
+# dependencies
+node_modules/
+backend/node_modules/
+
+# build outputs
+dist/
+backend/dist/
+coverage/
+backend/coverage/
+
+# environment variables
+.env
+backend/.env
+!.env.example
+!backend/.env.example
+
+# IDE & OS files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+
+# Prisma generated artifacts
+backend/src/database/prisma/migrations/

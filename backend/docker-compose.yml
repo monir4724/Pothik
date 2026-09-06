@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgis/postgis:15-3.3-alpine
+    container_name: pothik_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: pothik_user
+      POSTGRES_PASSWORD: pothik_password
+      POSTGRES_DB: pothik_db
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U pothik_user -d pothik_db']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: pothik_redis
+    restart: always
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pothik_backend
+    restart: always
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - API_PREFIX=/api/v1
+      - DATABASE_URL=postgresql://pothik_user:pothik_password@postgres:5432/pothik_db?schema=public
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - JWT_ACCESS_SECRET=super_secret_access_key_pothik_2026
+      - JWT_ACCESS_EXPIRATION=15m
+      - JWT_REFRESH_SECRET=super_secret_refresh_key_pothik_2026
+      - JWT_REFRESH_EXPIRATION=7d
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+  redis_data:
