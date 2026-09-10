@@ -1,0 +1,314 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+enum Role {
+  PASSENGER
+  DRIVER
+  ADMIN
+}
+
+enum DriverStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  SUSPENDED
+}
+
+enum DriverAvailability {
+  ONLINE
+  BUSY
+  OFFLINE
+}
+
+enum DocumentStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum RideStatus {
+  REQUESTED
+  ACCEPTED
+  DRIVER_ARRIVING
+  DRIVER_ARRIVED
+  WAITING
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  CASH
+}
+
+enum PaymentStatus {
+  PENDING
+  CONFIRMED
+}
+
+enum DebtStatus {
+  UNPAID
+  PAID
+}
+
+enum SosStatus {
+  ACTIVE
+  RESOLVED
+}
+
+model User {
+  id                 String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  phone              String          @unique
+  name               String?
+  email              String?
+  role               Role            @default(PASSENGER)
+  profilePictureUrl  String?
+  isActive           Boolean         @default(true)
+  rating             Float           @default(5.0)
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+
+  deviceTokens       DeviceToken[]
+  driverProfile      DriverProfile?
+  passengerRides     Ride[]          @relation("PassengerRides")
+  driverRides        Ride[]          @relation("DriverRides")
+  payments           Payment[]       @relation("PassengerPayments")
+  driverPayments     Payment[]       @relation("DriverPayments")
+  commissionDebts    DriverCommissionDebt[]
+  guardians          Guardian[]
+  sosRequests        SosRequest[]
+  notifications      Notification[]
+
+  @@map("users")
+}
+
+model OtpCode {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  phone     String
+  code      String
+  expiresAt DateTime
+  isUsed    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@map("otp_codes")
+}
+
+model DeviceToken {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId     String   @db.Uuid
+  fcmToken   String   @unique
+  deviceType String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("device_tokens")
+}
+
+model DriverProfile {
+  id                   String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId               String            @unique @db.Uuid
+  nidNumber            String
+  drivingLicenseNumber String
+  status               DriverStatus      @default(PENDING)
+  isOnline             Boolean           @default(false)
+  rating               Float             @default(5.0)
+  totalRides           Int               @default(0)
+  createdAt            DateTime          @default(now())
+  updatedAt            DateTime          @updatedAt
+
+  user                 User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  documents            DriverDocument[]
+  vehicles             Vehicle[]
+  driverLocation       DriverLocation?
+
+  @@map("driver_profiles")
+}
+
+model DriverDocument {
+  id              String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  driverProfileId String         @db.Uuid
+  documentType    String
+  documentUrl     String
+  status          DocumentStatus @default(PENDING)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  driverProfile   DriverProfile  @relation(fields: [driverProfileId], references: [id], onDelete: Cascade)
+
+  @@map("driver_documents")
+}
+
+model Vehicle {
+  id              String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  driverProfileId String        @db.Uuid
+  vehicleType     String        @default("economy")
+  make            String
+  model           String
+  year            Int
+  licensePlate    String        @unique
+  color           String
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  driverProfile   DriverProfile @relation(fields: [driverProfileId], references: [id], onDelete: Cascade)
+  rides           Ride[]
+
+  @@map("vehicles")
+}
+
+model DriverLocation {
+  id              String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  driverProfileId String             @unique @db.Uuid
+  status          DriverAvailability @default(OFFLINE)
+  latitude        Float
+  longitude       Float
+  heading         Float?             @default(0)
+  accuracy        Float?             @default(0)
+  updatedAt       DateTime           @updatedAt
+
+  driverProfile   DriverProfile      @relation(fields: [driverProfileId], references: [id], onDelete: Cascade)
+
+  @@map("driver_locations")
+}
+
+model Ride {
+  id                   String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  passengerId          String        @db.Uuid
+  driverId             String?       @db.Uuid
+  vehicleId            String?       @db.Uuid
+  status               RideStatus    @default(REQUESTED)
+  pickupLatitude       Float
+  pickupLongitude      Float
+  pickupAddress        String
+  dropoffLatitude      Float
+  dropoffLongitude     Float
+  dropoffAddress       String
+  estimatedFare        Float
+  actualFare           Float?
+  estimatedDistanceKm  Float
+  estimatedDurationMin Float
+  otp                  String
+  declinedDriverIds    String[]      @default([])
+  cancelledBy          String?
+  cancellationReason   String?
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+
+  passenger            User          @relation("PassengerRides", fields: [passengerId], references: [id])
+  driver               User?         @relation("DriverRides", fields: [driverId], references: [id])
+  vehicle              Vehicle?      @relation(fields: [vehicleId], references: [id])
+  payment              Payment?
+  commissionDebt       DriverCommissionDebt?
+  sosRequests          SosRequest[]
+
+  @@index([passengerId, status])
+  @@index([driverId, status])
+  @@map("rides")
+}
+
+model Payment {
+  id               String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  rideId           String         @unique @db.Uuid
+  driverId         String         @db.Uuid
+  passengerId      String         @db.Uuid
+  amount           Float
+  commissionAmount Float
+  paymentMethod    PaymentMethod  @default(CASH)
+  status           PaymentStatus  @default(PENDING)
+  confirmedAt      DateTime?
+  createdAt        DateTime       @default(now())
+
+  ride             Ride           @relation(fields: [rideId], references: [id])
+  driver           User           @relation("DriverPayments", fields: [driverId], references: [id])
+  passenger        User           @relation("PassengerPayments", fields: [passengerId], references: [id])
+  commissionDebt   DriverCommissionDebt?
+
+  @@map("payments")
+}
+
+model DriverCommissionDebt {
+  id        String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  driverId  String     @db.Uuid
+  paymentId String     @unique @db.Uuid
+  rideId    String     @unique @db.Uuid
+  amount    Float
+  status    DebtStatus @default(UNPAID)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  driver    User       @relation(fields: [driverId], references: [id])
+  payment   Payment    @relation(fields: [paymentId], references: [id])
+  ride      Ride       @relation(fields: [rideId], references: [id])
+
+  @@map("driver_commission_debts")
+}
+
+model PricingRule {
+  id             String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  vehicleType    String   @unique
+  baseFare       Float
+  perKmRate      Float
+  perMinuteRate  Float
+  minimumFare    Float
+  commissionRate Float    @default(0.20)
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("pricing_rules")
+}
+
+model Guardian {
+  id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId       String   @db.Uuid
+  name         String
+  phone        String
+  relationship String?
+  isPrimary    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("guardians")
+}
+
+model SosRequest {
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  passengerId String    @db.Uuid
+  rideId      String    @db.Uuid
+  latitude    Float
+  longitude   Float
+  status      SosStatus @default(ACTIVE)
+  smsStatus   String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  passenger   User      @relation(fields: [passengerId], references: [id])
+  ride        Ride      @relation(fields: [rideId], references: [id])
+
+  @@map("sos_requests")
+}
+
+model Notification {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId    String   @db.Uuid
+  title     String
+  body      String
+  data      Json?
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
+}
