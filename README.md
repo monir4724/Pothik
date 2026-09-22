@@ -1,6 +1,6 @@
 # Pothik
 
-Ride-hailing platform for Bangladesh — Bangla-first passenger & driver experience.
+Ride-hailing platform for Bangladesh — Bangla passenger & driver experience.
 
 **Repository:** [github.com/monir4724/Pothik](https://github.com/monir4724/Pothik)
 
