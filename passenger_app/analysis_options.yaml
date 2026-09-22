@@ -1,0 +1,33 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - lib/l10n/generated/**
+    - "**/*.g.dart"
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
+  errors:
+    missing_required_param: error
+    missing_return: error
+    dead_code: warning
+
+linter:
+  rules:
+    # Production hygiene
+    avoid_print: true
+    avoid_dynamic_calls: true
+    prefer_const_constructors: true
+    prefer_const_declarations: true
+    prefer_final_locals: true
+    prefer_single_quotes: true
+    require_trailing_commas: true
+    unawaited_futures: true
+    always_declare_return_types: true
+    avoid_redundant_argument_values: true
+    use_key_in_widget_constructors: true
+    sized_box_for_whitespace: true
+    unnecessary_await_in_return: true
+    directives_ordering: true
+    sort_child_properties_last: true

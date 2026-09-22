@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650" width="1200" height="650">
+  <defs>
+    <!-- Mask to knock out/cut the 'o' stroke where the car breaks out/overflows -->
+    <mask id="o-cutout-mask">
+      <!-- White reveals everything -->
+      <rect width="1200" height="650" fill="#FFFFFF"/>
+      <!-- Black cuts out the back stroke/contour of 'o' where the car sits and overflows -->
+      <!-- Smooth knockout behind car body and wheels -->
+      <path d="M 285 145 C 285 130 300 115 320 115 L 435 115 C 455 115 470 130 470 155 L 470 195 C 470 215 450 225 430 225 L 295 225 C 285 225 285 210 285 195 Z" fill="#000000"/>
+    </mask>
+
+    <!-- Linear gradient for smooth car dynamic finish -->
+    <linearGradient id="carOrangeAccent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF9029"/>
+      <stop offset="100%" stop-color="#FF5E00"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="650" fill="#FFFFFF"/>
+
+  <!-- Main Wordmark Group -->
+  <g id="pothik-wordmark" transform="translate(110, 160)">
+    
+    <!-- P -->
+    <path d="M 40 230 L 40 25 C 40 11.2 51.2 0 65 0 L 145 0 C 205 0 250 42 250 100 C 250 158 205 200 145 200 L 95 200 L 95 230 C 95 243.8 83.8 255 70 255 C 56.2 255 40 243.8 40 230 Z M 95 55 L 95 145 L 140 145 C 170 145 195 125 195 100 C 195 75 170 55 140 55 Z" fill="#0C8B51"/>
+
+    <!-- 'o' container with cutout mask where car overflows and erases background stroke -->
+    <g id="letter-o-masked" mask="url(#o-cutout-mask)">
+      <!-- Outer & Inner path of letter 'o' (Center approx x=355, y=165, outer r=78, inner r=40) -->
+      <path d="M 355 65 C 408 65 448 106 448 165 C 448 224 408 265 355 265 C 302 265 262 224 262 165 C 262 106 302 65 355 65 Z M 355 118 C 328 118 307 139 307 165 C 307 191 328 212 355 212 C 382 212 403 191 403 165 C 403 139 382 118 355 118 Z" fill="#0C8B51"/>
+    </g>
+
+    <!-- OVERFLOWING CAR ICON -->
+    <!-- Positioned dynamically breaking out towards the right side of 'o' with clean cutout gap -->
+    <g id="overflowing-car" transform="translate(308, 118)">
+      <!-- Subtle motion speed lines / trail emerging from the left interior of 'o' -->
+      <path d="M -16 52 L 2 52" stroke="#0C8B51" stroke-width="4.5" stroke-linecap="round" opacity="0.45"/>
+      <path d="M -24 64 L -4 64" stroke="#0C8B51" stroke-width="3.5" stroke-linecap="round" opacity="0.3"/>
+
+      <!-- Sleek Modern Car Silhouette overlapping and overflowing outside the 'o' perimeter -->
+      <!-- Smooth aerodynamic roofline, slanted windshield, modern electric vehicle contour -->
+      <path d="M 12 62 
+               C 14 48, 26 44, 40 43
+               L 62 43
+               C 74 43, 90 27, 108 27
+               L 138 27
+               C 152 27, 164 36, 172 45
+               L 185 52
+               C 196 53, 204 57, 204 65
+               L 204 74
+               C 204 78, 200 82, 195 82
+               L 182 82
+               C 180 73, 171 66, 161 66
+               C 151 66, 142 73, 140 82
+               L 78 82
+               C 76 73, 67 66, 57 66
+               C 47 66, 38 73, 36 82
+               L 16 82
+               C 10 82, 6 77, 6 71
+               Z" 
+            fill="#0C8B51"/>
+
+      <!-- Aerodynamic Glass / Window Cabin -->
+      <path d="M 68 44 
+               L 106 31 
+               C 110 30, 134 30, 138 31 
+               L 156 44 
+               C 158 45, 156 49, 152 49 
+               L 68 49 
+               C 65 49, 64 45, 68 44 Z" 
+            fill="#FFFFFF" opacity="0.95"/>
+      
+      <!-- Sleek window divider pillar -->
+      <rect x="114" y="31" width="4" height="18" fill="#0C8B51" rx="1.5"/>
+
+      <!-- Wheels with clean negative space & hubpins -->
+      <!-- Rear Wheel -->
+      <circle cx="57" cy="82" r="14" fill="#FFFFFF"/>
+      <circle cx="57" cy="82" r="9.5" fill="#0C8B51"/>
+      <circle cx="57" cy="82" r="4" fill="#FFFFFF"/>
+
+      <!-- Front Wheel (overflowing prominently to the right) -->
+      <circle cx="161" cy="82" r="14" fill="#FFFFFF"/>
+      <circle cx="161" cy="82" r="9.5" fill="#0C8B51"/>
+      <circle cx="161" cy="82" r="4" fill="#FFFFFF"/>
+
+      <!-- Forward-leaning dynamic Orange LED Headlight accent on front bumper -->
+      <path d="M 194 58 L 204 60 C 205 60.5 205 64 203 65 L 192 64 Z" fill="url(#carOrangeAccent)"/>
+
+      <!-- Tail light accent -->
+      <rect x="7" y="60" width="4.5" height="7" rx="2" fill="#FF7A00" opacity="0.9"/>
+    </g>
+
+    <!-- 't' (Tightly kerned to 'o' as requested, x position shifted closer to 525) -->
+    <g id="letter-t" transform="translate(535, 10)">
+      <path d="M 15 20 C 15 9 24 0 35 0 C 46 0 55 9 55 20 L 55 55 L 98 55 C 108 55 116 63 116 73 C 116 83 108 91 98 91 L 55 91 L 55 195 C 55 212 66 220 84 220 C 94 220 104 218 111 215 C 120 212 128 217 131 225 C 134 234 128 244 119 248 C 106 253 90 256 73 256 C 30 256 15 232 15 200 Z" fill="#0C8B51"/>
+    </g>
+
+    <!-- 'h' (Positioned harmoniously) -->
+    <g id="letter-h" transform="translate(680, 10)">
+      <path d="M 0 20 C 0 9 9 0 20 0 C 31 0 40 9 40 20 L 40 85 C 56 66 82 56 112 56 C 158 56 182 85 182 135 L 182 235 C 182 246 173 255 162 255 C 151 255 142 246 142 235 L 142 145 C 142 115 127 96 95 96 C 65 96 40 120 40 160 L 40 235 C 40 246 31 255 20 255 C 9 255 0 246 0 235 Z" fill="#0C8B51"/>
+    </g>
+
+    <!-- 'i' with signature location-pin waypoint dot in #FF7A00 -->
+    <g id="letter-i" transform="translate(895, 10)">
+      <!-- Stem -->
+      <path d="M 12 75 C 12 64 21 55 32 55 C 43 55 52 64 52 75 L 52 235 C 52 246 43 255 32 255 C 21 255 12 246 12 235 Z" fill="#0C8B51"/>
+      <!-- Clever waypoint / location pin dot -->
+      <path d="M 32 -3 C 14 -3 0 11 0 29 C 0 47 26 64 32 68 C 38 64 64 47 64 29 C 64 11 50 -3 32 -3 Z M 32 21 C 27 21 23 17 23 12 C 23 7 27 3 32 3 C 37 3 41 7 41 12 C 41 17 37 21 32 21 Z" fill="#FF7A00"/>
+    </g>
+
+    <!-- 'k' -->
+    <g id="letter-k" transform="translate(985, 10)">
+      <path d="M 0 20 C 0 9 9 0 20 0 C 31 0 40 9 40 20 L 40 125 L 98 72 C 106 65 118 66 125 74 C 132 82 131 94 123 101 L 64 152 L 132 232 C 138 240 137 251 129 257 C 122 263 111 261 105 253 L 40 174 L 40 235 C 40 246 31 255 20 255 C 9 255 0 246 0 235 Z" fill="#0C8B51"/>
+    </g>
+
+  </g>
+
+  <!-- Forward-journey path underline linking the ride-hailing identity -->
+  <path d="M 155 490 C 350 490 680 500 850 465 C 920 450 990 420 1030 380 C 1036 374 1045 378 1045 387 C 1040 408 970 475 845 498 C 670 528 350 515 155 515 C 140 515 130 502 140 493 C 144 490 149 490 155 490 Z" fill="#0C8B51" opacity="0.95"/>
+
+  <!-- Subtitle & Bangla Tagline -->
+  <text x="600" y="575" text-anchor="middle" font-family="'Hind Siliguri', 'Segoe UI', system-ui, sans-serif" font-size="28" font-weight="700" fill="#0C8B51" letter-spacing="2">
+    পথিক • নিরাপদ যাত্রার সাথী
+  </text>
+  <text x="600" y="612" text-anchor="middle" font-family="'Segoe UI', -apple-system, sans-serif" font-size="14" font-weight="600" fill="#7A8B82" letter-spacing="6">
+    THE WAYFARER • RIDE-HAILING BANGLADESH
+  </text>
+</svg>

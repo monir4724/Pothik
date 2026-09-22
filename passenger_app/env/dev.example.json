@@ -1,0 +1,12 @@
+{
+  "APP_ENV": "dev",
+  "API_BASE_URL": "http://10.0.2.2:8000/api/v1",
+  "REVERB_HOST": "10.0.2.2",
+  "REVERB_PORT": 8080,
+  "REVERB_APP_KEY": "local-key",
+  "REVERB_TLS": false,
+  "SENTRY_DSN": "",
+  "USE_FAKE_BACKEND": true,
+  "GUARDIAN_WEB_BASE_URL": "http://10.0.2.2:8000/track",
+  "MAPS_API_KEY": "AIzaSyAC7AeKnHbuw_LO8UxKuIu21EHSXLY8H-4"
+}

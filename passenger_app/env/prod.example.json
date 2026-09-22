@@ -1,0 +1,12 @@
+{
+  "APP_ENV": "prod",
+  "API_BASE_URL": "https://api.pothik.app/api/v1",
+  "REVERB_HOST": "ws.pothik.app",
+  "REVERB_PORT": 443,
+  "REVERB_APP_KEY": "REPLACE_WITH_PROD_REVERB_KEY",
+  "REVERB_TLS": true,
+  "SENTRY_DSN": "https://REPLACE@o0.ingest.sentry.io/0",
+  "USE_FAKE_BACKEND": false,
+  "GUARDIAN_WEB_BASE_URL": "https://track.pothik.app",
+  "MAPS_API_KEY": "YOUR_GOOGLE_MAPS_KEY"
+}

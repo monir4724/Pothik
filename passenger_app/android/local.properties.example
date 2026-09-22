@@ -1,0 +1,2 @@
+# Copy to local.properties (gitignored). The Flutter tool appends sdk.dir/flutter.sdk itself.
+MAPS_API_KEY=YOUR_ANDROID_GOOGLE_MAPS_KEY
