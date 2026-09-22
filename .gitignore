@@ -1,18 +1,37 @@
 # dependencies
 node_modules/
 backend/node_modules/
+frontend/node_modules/
+passenger_app/**/node_modules/
 
 # build outputs
 dist/
 backend/dist/
+frontend/dist/
 coverage/
 backend/coverage/
+passenger_app/build/
+passenger_app/.dart_tool/
+passenger_app/.flutter-plugins
+passenger_app/.flutter-plugins-dependencies
+passenger_app/.gradle-home/
+passenger_app/android/.gradle/
+passenger_app/android/local.properties
+passenger_app/ios/Flutter/Secrets.xcconfig
+passenger_app/ios/Pods/
+passenger_app/ios/.symlinks/
+passenger_app/lib/l10n/generated/
+passenger_app/coverage/
+passenger_app/**/*.iml
 
 # environment variables
 .env
 backend/.env
+frontend/.env
 !.env.example
 !backend/.env.example
+passenger_app/env/*.json
+!passenger_app/env/*.example.json
 
 # IDE & OS files
 .DS_Store
@@ -20,6 +39,7 @@ Thumbs.db
 .vscode/
 .idea/
 *.log
+.puku/
 
 # Prisma generated artifacts
 backend/src/database/prisma/migrations/

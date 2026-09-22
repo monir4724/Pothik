@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- App Icon Background Gradient (Emerald Depth) -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E9F5D"/>
+      <stop offset="60%" stop-color="#0C8B51"/>
+      <stop offset="100%" stop-color="#065932"/>
+    </linearGradient>
+
+    <!-- Subtle Inner Glow / Surface Light -->
+    <linearGradient id="surfaceGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.22"/>
+      <stop offset="40%" stop-color="#FFFFFF" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.15"/>
+    </linearGradient>
+
+    <!-- Orange Pin & Accent Glow -->
+    <linearGradient id="orangePinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFA24C"/>
+      <stop offset="100%" stop-color="#FF6B00"/>
+    </linearGradient>
+
+    <!-- Drop Shadow for Lettermark Elevation -->
+    <filter id="appElevation" x="-20%" y="-20%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#022B18" flood-opacity="0.45"/>
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#022B18" flood-opacity="0.3"/>
+    </filter>
+
+    <!-- Soft Shadow for Pin Element -->
+    <filter id="pinShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#732200" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- iOS / Modern Android Squircle Base (512x512 with 114px radius standard) -->
+  <rect width="512" height="512" rx="114" fill="url(#bgGrad)"/>
+  <rect width="512" height="512" rx="114" fill="url(#surfaceGlow)"/>
+
+  <!-- Subtle curved road / journey lines in background -->
+  <path d="M -20 420 C 140 430 320 450 480 390 C 510 380 530 370 540 360" fill="none" stroke="#FFFFFF" stroke-width="2.5" opacity="0.12" stroke-linecap="round"/>
+  <path d="M -10 460 C 160 470 340 480 530 420" fill="none" stroke="#FFFFFF" stroke-width="1.5" opacity="0.08" stroke-linecap="round"/>
+
+  <!-- Master Monogram Group: Bold "P" with integrated Car Motion & Location Waypoint Pin -->
+  <g id="pothik-monogram" filter="url(#appElevation)">
+    
+    <!-- Bold Pristine White Letter "P" Structure -->
+    <!-- Scaled and centered harmoniously for high-impact mobile home screen recognition -->
+    <path d="M 125 395 
+             L 125 125 
+             C 125 110 137 98 152 98 
+             L 245 98 
+             C 322 98 375 145 375 220 
+             C 375 295 322 342 245 342 
+             L 192 342 
+             L 192 395 
+             C 192 409 180 420 166 420 
+             C 152 420 125 409 125 395 Z 
+             M 192 165 
+             L 192 275 
+             L 240 275 
+             C 285 275 310 252 310 220 
+             C 310 188 285 165 240 165 Z" 
+          fill="#FFFFFF"/>
+
+    <!-- Integrated Modern Sleek Car overflowing dynamically inside/across the loop of 'P' -->
+    <g id="icon-car" transform="translate(194, 182)">
+      <!-- Motion lines -->
+      <line x1="-12" y1="36" x2="-2" y2="36" stroke="#0C8B51" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+      <line x1="-18" y1="46" x2="-6" y2="46" stroke="#0C8B51" stroke-width="2.5" stroke-linecap="round" opacity="0.4"/>
+
+      <!-- Modern Car Silhouette in signature Brand Green #0C8B51 -->
+      <path d="M 10 44
+               C 12 34, 21 31, 32 30
+               L 48 30
+               C 58 30, 70 18, 85 18
+               L 110 18
+               C 121 18, 131 25, 137 32
+               L 148 37
+               C 157 38, 163 41, 163 47
+               L 163 53
+               C 163 56, 160 59, 156 59
+               L 145 59
+               C 143 52, 136 47, 128 47
+               C 120 47, 113 52, 111 59
+               L 62 59
+               C 60 52, 53 47, 45 47
+               C 37 47, 30 52, 28 59
+               L 13 59
+               C 8 59, 5 55, 5 51
+               Z" 
+            fill="#0C8B51"/>
+
+      <!-- Windshield / Aerodynamic cabin window -->
+      <path d="M 54 31 
+               L 84 21 
+               C 87 20, 107 20, 110 21 
+               L 124 31 
+               C 126 32, 124 35, 121 35 
+               L 54 35 
+               C 51 35, 51 32, 54 31 Z" 
+            fill="#FFFFFF" opacity="0.95"/>
+      <rect x="91" y="21" width="3" height="14" fill="#0C8B51" rx="1"/>
+
+      <!-- Front & Rear Wheels -->
+      <circle cx="45" cy="59" r="10.5" fill="#FFFFFF"/>
+      <circle cx="45" cy="59" r="7" fill="#0C8B51"/>
+      <circle cx="45" cy="59" r="3" fill="#FFFFFF"/>
+
+      <circle cx="128" cy="59" r="10.5" fill="#FFFFFF"/>
+      <circle cx="128" cy="59" r="7" fill="#0C8B51"/>
+      <circle cx="128" cy="59" r="3" fill="#FFFFFF"/>
+
+      <!-- Orange Speed Headlight Accent -->
+      <polygon points="155,42 163,44 162,47 154,46" fill="#FF7A00"/>
+    </g>
+
+    <!-- Signature Waypoint Pin / Destination Marker perched elegantly on the letter's crown -->
+    <g id="waypoint-pin" transform="translate(325, 70)" filter="url(#pinShadow)">
+      <!-- Outer pin body -->
+      <path d="M 32 0 
+               C 14.3 0 0 14.3 0 32 
+               C 0 54 27 75 32 79 
+               C 37 75 64 54 64 32 
+               C 64 14.3 49.7 0 32 0 Z" 
+            fill="url(#orangePinGrad)"/>
+      <!-- Inner crisp white aperture dot -->
+      <circle cx="32" cy="28" r="11" fill="#FFFFFF"/>
+      <!-- Core green microdot -->
+      <circle cx="32" cy="28" r="4.5" fill="#0C8B51"/>
+    </g>
+
+  </g>
+
+  <!-- Forward-journey road baseline sweep at bottom -->
+  <path d="M 90 445 C 220 445 350 455 425 425 C 434 421 440 427 437 435 C 418 456 345 478 220 478 C 90 478 80 460 90 445 Z" fill="#FFFFFF" opacity="0.3"/>
+</svg>

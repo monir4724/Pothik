@@ -1,0 +1,12 @@
+{
+  "APP_ENV": "staging",
+  "API_BASE_URL": "https://api-staging.pothik.app/api/v1",
+  "REVERB_HOST": "ws-staging.pothik.app",
+  "REVERB_PORT": 443,
+  "REVERB_APP_KEY": "REPLACE_WITH_STAGING_REVERB_KEY",
+  "REVERB_TLS": true,
+  "SENTRY_DSN": "https://REPLACE@o0.ingest.sentry.io/0",
+  "USE_FAKE_BACKEND": false,
+  "GUARDIAN_WEB_BASE_URL": "https://track-staging.pothik.app",
+  "MAPS_API_KEY": "YOUR_GOOGLE_MAPS_KEY"
+}

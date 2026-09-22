@@ -1,0 +1,8 @@
+# Copy to key.properties (gitignored). Generate the keystore once and back it up
+# offline — losing it means losing the ability to update the Play listing.
+#   keytool -genkey -v -keystore upload-keystore.jks -storetype JKS \
+#     -keyalg RSA -keysize 2048 -validity 10000 -alias upload
+storeFile=app/upload-keystore.jks
+storePassword=REPLACE
+keyAlias=upload
+keyPassword=REPLACE

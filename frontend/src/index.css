@@ -1,0 +1,183 @@
+:root {
+  /* Base Color Ramps */
+  --navy-50: #EEF1F6;
+  --navy-100: #D6DCE8;
+  --navy-200: #AEBBD1;
+  --navy-300: #8698B9;
+  --navy-400: #5E75A1;
+  --navy-500: #3B5389;
+  --navy-600: #24406F;
+  --navy-700: #1B325A;
+  --navy-800: #172946;
+  --navy-900: #14213D;
+  --navy-950: #0D1729;
+
+  --amber-50: #FEF6E9;
+  --amber-100: #FCE7C2;
+  --amber-200: #F9D28E;
+  --amber-300: #F6BD5A;
+  --amber-400: #F4B646;
+  --amber-500: #F2A93C;
+  --amber-600: #D6902B;
+  --amber-700: #B37423;
+  --amber-800: #8F5C1C;
+  --amber-900: #6B4515;
+  --amber-950: #4C3110;
+
+  --gray-50: #F7F7F5;
+  --gray-100: #EFEFEC;
+  --gray-200: #E3E5E8;
+  --gray-300: #C7CBD1;
+  --gray-400: #9CA3AF;
+  --gray-500: #6B7280;
+  --gray-600: #4B5262;
+  --gray-700: #363B47;
+  --gray-800: #23262E;
+  --gray-900: #16181D;
+  --gray-950: #0E0F13;
+
+  /* Status Colors */
+  --success-500: #1E8A5F;
+  --success-50: #E7F5EE;
+  --danger-500: #D64545;
+  --danger-50: #FBEAEA;
+  --warning-500: #C97A1E;
+  --warning-50: #FBF0E2;
+
+  /* Semantic Tokens */
+  --bg: var(--gray-50);
+  --surface: #FFFFFF;
+  --border-default: var(--gray-200);
+  --border-strong: var(--gray-300);
+  --text-primary: var(--gray-900);
+  --text-secondary: var(--gray-500);
+  --text-disabled: var(--gray-400);
+  --text-on-primary: #FFFFFF;
+  --text-on-accent: var(--navy-900); /* NEVER WHITE ON AMBER */
+  --interactive-primary: var(--navy-900);
+  --interactive-primary-hover: var(--navy-700);
+  --interactive-primary-pressed: var(--navy-950);
+  --interactive-accent: var(--amber-500);
+  --interactive-accent-hover: var(--amber-400);
+  --interactive-accent-pressed: var(--amber-600);
+  --interactive-disabled-bg: var(--gray-100);
+  --interactive-disabled-text: var(--gray-400);
+  --focus-ring: rgba(59, 83, 137, 0.4);
+
+  --success: var(--success-500);
+  --success-bg: var(--success-50);
+  --danger: var(--danger-500);
+  --danger-bg: var(--danger-50);
+  --warning: var(--warning-500);
+  --warning-bg: var(--warning-50);
+
+  /* Elevation (Shadows - Floating Content Only) */
+  --shadow-sm: 0 2px 8px rgba(20, 33, 61, 0.10);
+  --shadow-md: 0 8px 24px rgba(20, 33, 61, 0.16);
+  --shadow-fab: 0 4px 12px rgba(214, 69, 69, 0.35);
+
+  /* Fonts */
+  --font-ui: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-num: 'Inter', system-ui, sans-serif;
+}
+
+/* Reset & Global Styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-ui);
+  background-color: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Utility Font Classes */
+.font-ui {
+  font-family: var(--font-ui);
+}
+
+.font-num {
+  font-family: var(--font-num);
+  font-feature-settings: "tnum" 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Typography Scales */
+.text-caption {
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+.text-body {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.text-label {
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.text-subhead {
+  font-size: 18px;
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+.text-title {
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.text-hero {
+  font-family: var(--font-num);
+  font-size: 32px;
+  line-height: 1.1;
+  font-weight: 600;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Animations */
+@keyframes otpShake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-4px); }
+  40%, 80% { transform: translateX(4px); }
+}
+
+.animate-otp-shake {
+  animation: otpShake 150ms ease-out;
+}
+
+@keyframes skeletonPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+.animate-skeleton {
+  animation: skeletonPulse 1.2s ease-in-out infinite;
+  background-color: var(--gray-200);
+  border-radius: 8px;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gray-300);
+  border-radius: 3px;
+}
